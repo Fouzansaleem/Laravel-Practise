@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Create Posts</div>
+                <div class="panel-heading">Your Posts</div>
 
 					<div class="container">
-					<h2>Create Posts</h2><br>
+					<h2>Your Posts</h2><br>
 
 
 {!! Form::open(array('route' => 'post.store','method'=>'POST')) !!}
@@ -22,7 +22,7 @@ Description:<br>
 <a type="submit"  href="{{ route('post.index') }}">Cancel</a><br>
 
 {!! Form::close() !!}
-<br>
+
 
 
 

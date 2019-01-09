@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\post;
+use App\Post;
 
-class PostController extends Controller
-{
+class PostController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
-        $posts = post::all();
-        return view('crud.index',['posts'=> $posts]);
+        $posts = Post::all();
+        return view('posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -24,77 +22,71 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
-        return view('crud.create');
+        return view('posts.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
-        post::create($request->all());
+        Post::create($request->all());
         return redirect()->route('post.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
         $posts = Post::find($id);
-        return view('crud.show',['post'=>$posts]);
-
+        return view('posts.show', ['post' => $posts]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
         $post = Post::find($id);
-        return view('crud.edit',['post'=> $post]);
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
         $post = Post::find($id);
         $post->update($request->all());
-        return redirect()->route('post.index'); 
+        return redirect()->route('post.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
-                Post::find($id)->delete();
-        return redirect()-> route('post.index');
+        Post::find($id)
+            ->delete();
+        return redirect()->route('post.index');
     }
 }

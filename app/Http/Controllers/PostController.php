@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\post;
+use App\Post;
 
 class PostController extends Controller
 {
@@ -15,8 +15,8 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = post::all();
-        return view('index',['posts'=> $posts]);
+        $posts = Post::all();
+        return view('posts.index',['posts'=> $posts]);
     }
 
     /**
@@ -27,7 +27,7 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view('create');
+        return view('posts.create');
     }
 
     /**
@@ -39,7 +39,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-        post::create($request->all());
+        Post::create($request->all());
         return redirect()->route('post.index');
     }
 
@@ -52,8 +52,8 @@ class PostController extends Controller
     public function show($id)
     {
         //
-        $posts =post::find($id);
-        return view('show',['post'=>$posts]);
+        $posts =Post::find($id);
+        return view('posts.show',['post'=>$posts]);
 
     }
 
@@ -66,8 +66,8 @@ class PostController extends Controller
     public function edit($id)
     {
         //
-        $post = post::find($id);
-        return view('edit',['post'=> $post]);
+        $post = Post::find($id);
+        return view('posts.edit',['post'=> $post]);
     }
 
     /**
@@ -80,9 +80,9 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $post = post::find($id);
+        $post = Post::find($id);
         $post->update($request->all());
-        return redirect()->route('post.index'); 
+        return redirect()->route('post.index');
     }
 
     /**
@@ -94,7 +94,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
-                post::find($id)->delete();
+        Post::find($id)->delete();
         return redirect()-> route('post.index');
     }
 }

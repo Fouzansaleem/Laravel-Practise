@@ -16,7 +16,7 @@ class PostController extends Controller
     {
         //
         $posts = post::all();
-        return view('index',['posts'=> $posts]);
+        return view('crud.index',['posts'=> $posts]);
     }
 
     /**
@@ -27,7 +27,7 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view('create');
+        return view('crud.create');
     }
 
     /**
@@ -52,8 +52,8 @@ class PostController extends Controller
     public function show($id)
     {
         //
-        $posts =post::find($id);
-        return view('show',['post'=>$posts]);
+        $posts = Post::find($id);
+        return view('crud.show',['post'=>$posts]);
 
     }
 
@@ -66,8 +66,8 @@ class PostController extends Controller
     public function edit($id)
     {
         //
-        $post = post::find($id);
-        return view('edit',['post'=> $post]);
+        $post = Post::find($id);
+        return view('crud.edit',['post'=> $post]);
     }
 
     /**
@@ -80,7 +80,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $post = post::find($id);
+        $post = Post::find($id);
         $post->update($request->all());
         return redirect()->route('post.index'); 
     }
@@ -94,7 +94,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
-                post::find($id)->delete();
+                Post::find($id)->delete();
         return redirect()-> route('post.index');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Post;
 
 class PostController extends Controller {
@@ -35,8 +36,15 @@ class PostController extends Controller {
      */
     public function store(Request $request) {
         //
+       
+       Validator::make($request->all(), [
+    'title' => 'required|unique:posts|max:255',
+    'description' => 'required',
+        ])->validate();
+
+
         Post::create($request->all());
-        return redirect()->route('post.index');
+        return redirect()->route('post.index')->with('success','Post Created successfully');
     }
 
     /**
@@ -72,9 +80,15 @@ class PostController extends Controller {
      */
     public function update(Request $request, $id) {
         //
+        
+        Validator::make($request->all(), [
+    'title' => 'required|unique:posts|max:255',
+    'description' => 'required',
+        ])->validate();
+
         $post = Post::find($id);
         $post->update($request->all());
-        return redirect()->route('post.index');
+        return redirect()->route('post.index')->with('success','Post Updated successfully');
     }
 
     /**
@@ -87,6 +101,8 @@ class PostController extends Controller {
         //
         Post::find($id)
             ->delete();
-        return redirect()->route('post.index');
+        return redirect()->route('post.index')->with('success','Post Deleted successfully');
     }
+
+
 }

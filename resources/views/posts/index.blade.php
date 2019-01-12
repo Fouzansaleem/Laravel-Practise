@@ -3,29 +3,32 @@
 @section('content')
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Your Posts</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Your Posts</div>
 
-                    <div class="container">
-                        <h2>Your Posts</H2>
-                        <div class="col-md-offset-5">
-                            <a type="submit" class="btn btn-primary" href="{{ route('post.create') }}" > Create New Post</a>
-
-                        </div>
-                        <br>
-
-                        <div class="container">
+                <div class="panel-body">
+                         <h2>Your Posts
+                                <a type="submit" style="float: right" class="btn btn-primary" href="{{ route('home') }}" > Home</a> 
+                        </h2>
+                        <div align="center">
+                         <a type="submit"  class="btn btn-primary"  href="{{ route('post.create') }}" > Create New Post</a>
+                             </div>    
+                                   @if ($message = Session::get('success'))
+                                  <div class="alert alert-success" align="center">
+                                   {{ $message }}
+                                  </div>
+                                      @endif
+                           <div>
+                            <br>
                             <table class="table table-bordered">
-
                                 <tr>
                                     <th>Title</th>
                                     <th>Description</th>
-                                    <th width="800px">Action</th>
+                                    <th width="270px">Action</th>
                                 </tr>
-
                                 @foreach($posts as $key =>$post)
                                     <tr>
                                         <td>{{ $post->title }}</td>
@@ -38,16 +41,14 @@
                                             {!! Form::close() !!}
                                         </td>
                                     </tr>
-
                                 @endforeach
                             </table>
-                        </div>
-                        <a type="submit" class="btn btn-primary" href="{{ route('home') }}" > Home</a>
-
-                    </div>
-                    <br>
+                            </div>                                
+                             <br>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 @endsection

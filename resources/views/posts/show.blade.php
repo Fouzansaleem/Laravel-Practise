@@ -8,8 +8,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Post Detail</div>
 
-                    <div class="container">
-                        <h2>Post Detail</h2><br>
+                    <div class="panel-body">
+                        <h2>Post Detail 
+                            <a type="submit" style="float: right" class="btn btn-primary" href="{{ route('post.index') }}">Back</a>
+                        </h2><br>
 
 
 
@@ -17,8 +19,33 @@
                         <b>Description:</b> {{ $post->description }}<br>
 
                         <br>
-
-                        <a type="submit"class="btn btn-primary" href="{{ route('post.index') }}">Back</a><br>
+                    <div class="panel-footer">
+                    <h4><b>COMMENTS</b></h4>
+                    <ul>
+                    @foreach($post->comments as $comment)
+                    <li>
+                        {{ $comment->comment}}<br>
+                        <strong> {{ $comment->user->name }} </strong>
+                            {{\carbon\Carbon::parse($comment->created_at)->diffForHumans() }}
+                    </li>
+                    @endforeach
+                    </ul>
+                    </div>
+                    <div class="Add comment">
+                    <h4>Add Comment</h4>
+                    <form method="POST" action="{{ route('comment.store') }}">
+                        <input type="hidden" name="post_id" value="{{ $post->id }}" />
+                        {!! csrf_field() !!}
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="comment"required  />
+                        </div>
+                        <div>
+                            
+                            <input type="submit" class="btn btn-warning" value=" Comment" required />
+                        </div>
+                    </form>
+                    </div>
+                        
                         <br>
 
                     </div>

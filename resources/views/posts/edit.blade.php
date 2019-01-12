@@ -11,6 +11,16 @@
                     <div class="container">
                         <h2>Edit Post</h2><br>
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
                         {!! Form::model($post,['method'=>'PATCH','route'=>['post.update',$post->id]]) !!}
                         Title:<br>
                         {!! Form::text('title',null,array()) !!}<br>

@@ -22,4 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/post','PostController');
 
+//Route:: resource('/post/comment/store','PostController@commentadd');
+Route::post('/comment/store', 'CommentController@store') -> name('comment.store');
+
 

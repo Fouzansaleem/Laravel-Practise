@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Post;
 
 
-
-
 class PostController extends Controller {
 
     /**
@@ -25,11 +23,8 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //
-
-
-        $userId = \Auth::user()->id;
-        $posts = Post::where('user_id',$userId)->get();
+        $user = \Auth::user();
+        $posts = $user->posts;
         return view('posts.index', ['posts' => $posts]);
     }
 

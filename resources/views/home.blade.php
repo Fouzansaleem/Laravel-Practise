@@ -33,7 +33,7 @@
                                 <tr>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->description }}</td>
-                                    <td>{{ $post['user_id'] }}</td>
+                                    <td>{{ $post->creator->name }}</td>
 
                                     <td>
 

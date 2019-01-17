@@ -35,7 +35,7 @@
                                     <tr>
                                         <td>{{ $post->title }}</td>
                                         <td>{{ $post->description }}</td>
-                                        <td>{{ $post->user_id }}</td>
+                                        <td>{{ $post->creator->name }}</td>
                                         <td>
 
                                             <a class="btn btn-success" href="{{ route('post.show',$post->id) }}">Show</a>

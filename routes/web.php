@@ -11,21 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('/auth.login');
-});
-
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')
+     ->name('home');
 
-Route::resource('/post','PostController');
+Route::resource('/post', 'PostController');
 
 //Route:: resource('/post/comment/store','PostController@commentadd');
-Route::post('/comment/store', 'CommentController@store') -> name('comment.store');
+Route::post('/comment/store', 'CommentController@store')
+     ->name('comment.store');
 
-Route::any('/test','TestingController@test');
+Route::any('/test', 'TestingController@test');
 
 
 

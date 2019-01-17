@@ -24,10 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $order = Post::orderBy('created_at', 'desc')->take(4)->get();
+        $post = Post::latest()->paginate(2);
 
-        $post = Post::all();
-
-        return view('home',['posts' => $post])->with('posts', $order);
+        return view('home',['posts' => $post]);
     }
 }

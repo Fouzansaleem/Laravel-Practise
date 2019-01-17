@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Post;
 
+
+
+
 class PostController extends Controller {
 
     /**
@@ -23,7 +26,10 @@ class PostController extends Controller {
      */
     public function index() {
         //
-        $posts = Post::all();
+
+
+        $userId = \Auth::user()->id;
+        $posts = Post::where('user_id',$userId)->get();
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -46,14 +52,17 @@ class PostController extends Controller {
     public function store(Request $request) {
         //
 
-        Validator::make($request->all(), [
-            'title' => 'required|unique:posts|max:255',
-            'description' => 'required',
-        ])
-                 ->validate();
+        $this->validate($request, array(
+            'title' => 'required|max:255',
+            'description' => 'required'
+        ));
 
+        $postvar = new Post();
+        $postvar->title = $request->title;
+        $postvar->description = $request->description;
+        $postvar->user_id = \Auth::user()->id;
+        $postvar->save();
 
-        Post::create($request->all());
         return redirect()
             ->route('post.index')
             ->with('success', 'Post Created successfully');
@@ -67,6 +76,7 @@ class PostController extends Controller {
      */
     public function show($id) {
         //
+
         $posts = Post::find($id);
         return view('posts.show', ['post' => $posts]);
     }

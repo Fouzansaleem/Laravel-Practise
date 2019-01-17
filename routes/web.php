@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/auth.login');
 });
 
 
@@ -24,5 +24,8 @@ Route::resource('/post','PostController');
 
 //Route:: resource('/post/comment/store','PostController@commentadd');
 Route::post('/comment/store', 'CommentController@store') -> name('comment.store');
+
+Route::any('/test','TestingController@test');
+
 
 

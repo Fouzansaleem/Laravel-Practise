@@ -28,9 +28,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
-                        <?php echo e(config('app.name', 'Laravel')); ?>
-
+                    <a class="navbar-brand" href="<?php echo e(url('/home')); ?>">
+                        Home
                     </a>
                 </div>
 

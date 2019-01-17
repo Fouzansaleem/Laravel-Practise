@@ -12,3 +12,4 @@ yarn-error.log
 *.log
 .idea/
 /storage/*
+app/Http/Controllers/TestingController.php

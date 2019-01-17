@@ -27,13 +27,17 @@
                                 <tr>
                                     <th>Title</th>
                                     <th>Description</th>
-                                    <th width="270px">Action</th>
+                                    <th>Created By</th>
+                                    <th width="400px">Action</th>
                                 </tr>
+                                @if (count($posts)>0)
                                 @foreach($posts as $key =>$post)
                                     <tr>
                                         <td>{{ $post->title }}</td>
                                         <td>{{ $post->description }}</td>
+                                        <td>{{ $post->user_id }}</td>
                                         <td>
+
                                             <a class="btn btn-success" href="{{ route('post.show',$post->id) }}">Show</a>
                                             <a class="btn btn-warning" href="{{ route('post.edit',$post->id) }}">Edit</a>
                                             {!! Form::open(['method'=>'DELETE','route'=>['post.destroy',$post->id],'style'=>'display:inline']) !!}
@@ -42,6 +46,9 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                                    @else
+                                <h4>NO posts </h4>
+                                    @endif
                             </table>
                             </div>                                
                              <br>
@@ -52,3 +59,5 @@
 </div>
 
 @endsection
+
+

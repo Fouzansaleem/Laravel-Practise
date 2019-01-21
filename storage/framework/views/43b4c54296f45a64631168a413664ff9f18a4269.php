@@ -28,7 +28,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="<?php echo e(url('/home')); ?>">
+                    <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
                         Home
                     </a>
                 </div>

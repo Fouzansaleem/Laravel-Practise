@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Monolog\Handler\RavenHandlerTest;
 
 class User extends Authenticatable {
     use Notifiable;
@@ -15,6 +16,7 @@ class User extends Authenticatable {
      */
     protected $fillable = [
         'name',
+        'user_type',
         'email',
         'password',
     ];
@@ -38,5 +40,9 @@ class User extends Authenticatable {
         return $this->hasMany('App\Comment', 'user_id', 'id');
     }
 
-    //public const ROLE_USER='user';
+     const ADMIN_TYPE='admin';
+    const DEFAULT_TYPE='user';
+    public function admin(){
+        return $this->user_type === self::ADMIN_TYPE;
+    }
 }

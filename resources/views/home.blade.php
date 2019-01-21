@@ -28,6 +28,7 @@
                                         <th>Created By</th>
                                         <th width="400px">Action</th>
                                     </tr>
+@auth
                                     @if (count($posts)>0)
                                         @foreach($posts->all() as $post)
                                 <tr>
@@ -35,19 +36,21 @@
                                     <td>{{ $post->description }}</td>
                                     <td>{{ $post->creator->name }}</td>
 
-                                    <td>
-
-                                        <a class="btn btn-success" href="{{ route('post.show',$post->id) }}">Show</a>
-
+                                    <td><a class="btn btn-success" href="{{ route('post.show',$post->id) }}">Show</a>
+                                    @if(Auth::id() == $post->user_id)
+                                     <a class="btn btn-warning" href="{{ route('post.edit',$post->id) }}">Edit</a>
+                                    @endif
                                     </td>
+
                                 </tr>
                                     @endforeach
                                     @else
                                         <h2>No Posts is Created</h2>
                                     @endif
-                                </table>
-                                {{--{{$posts->render()}}--}}
 
+                                </table>
+                                {{$posts->render()}}
+@endauth
 
                 </div>
             </div>

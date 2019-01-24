@@ -7,8 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ConfirmEmail extends Mailable
-{
+class ConfirmEmail extends Mailable {
     use Queueable, SerializesModels;
 
     /**
@@ -18,10 +17,8 @@ class ConfirmEmail extends Mailable
      */
     public $user;
 
-    public function __construct($user)
-    {
-        //
-        $this->user = $user;
+    public function __construct() {
+
     }
 
     /**
@@ -29,20 +26,8 @@ class ConfirmEmail extends Mailable
      *
      * @return $this
      */
-    public function build()
-    {
-        $address = 'fouzanvictor@gmail.com';
-        $subject = 'This is a demo!';
-        $name = 'Fouzan Saleem';
-
-        return $this->view('emails.confirmemail')
-            ->from($address, $name)
-            ->cc($this->user->email, $this->user->name)
-            ->bcc($address, $name)
-            ->replyTo($address, $name)
-            ->subject($subject)
-            ->with([ 'message' => $this->user['message'] ]);
+    public function build() {
+        return $this->view('emails.confirmemail');
     }
-    //    return $this->view('view.name');
 
 }

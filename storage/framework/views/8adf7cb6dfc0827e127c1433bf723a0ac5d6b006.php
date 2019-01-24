@@ -27,16 +27,17 @@
                                         <th>Created By</th>
                                         <th width="400px">Action</th>
                                     </tr>
-<?php if(auth()->guard()->check()): ?>
+
                                     <?php if(count($posts)>0): ?>
                                         <?php $__currentLoopData = $posts->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <td><?php echo e($post->title); ?></td>
                                     <td><?php echo e($post->description); ?></td>
                                     <td><?php echo e($post->creator->name); ?></td>
-
+                                    <?php if(auth()->guard()->check()): ?>
                                     <td><a class="btn btn-success" href="<?php echo e(route('post.show',$post->id)); ?>">Show</a>
-                                    <?php if(Auth::id() == $post->user_id): ?>
+                                    <?php endif; ?>
+                                        <?php if(Auth::id() == $post->user_id): ?>
                                      <a class="btn btn-warning" href="<?php echo e(route('post.edit',$post->id)); ?>">Edit</a>
                                     <?php endif; ?>
                                     </td>
@@ -50,7 +51,7 @@
                                 </table>
                                 <?php echo e($posts->render()); ?>
 
-<?php endif; ?>
+
 
                 </div>
             </div>

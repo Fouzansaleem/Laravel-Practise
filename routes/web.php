@@ -16,11 +16,11 @@ Route::get('/admin', 'AdminController@admin')
     ->name('admin');
 
 
-Route::view('/', 'welcome');
+//Route::get('/', 'HomeController@index');
 Auth::routes();
 
 
-Route::get('/home', 'HomeController@index')
+Route::get('/', 'HomeController@index')
      ->name('home');
 
 Route::resource('/post', 'PostController');

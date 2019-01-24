@@ -28,16 +28,17 @@
                                         <th>Created By</th>
                                         <th width="400px">Action</th>
                                     </tr>
-@auth
+
                                     @if (count($posts)>0)
                                         @foreach($posts->all() as $post)
                                 <tr>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->description }}</td>
                                     <td>{{ $post->creator->name }}</td>
-
+                                    @auth
                                     <td><a class="btn btn-success" href="{{ route('post.show',$post->id) }}">Show</a>
-                                    @if(Auth::id() == $post->user_id)
+                                    @endauth
+                                        @if(Auth::id() == $post->user_id)
                                      <a class="btn btn-warning" href="{{ route('post.edit',$post->id) }}">Edit</a>
                                     @endif
                                     </td>
@@ -50,7 +51,7 @@
 
                                 </table>
                                 {{$posts->render()}}
-@endauth
+
 
                 </div>
             </div>

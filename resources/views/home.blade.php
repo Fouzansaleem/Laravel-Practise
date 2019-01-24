@@ -5,25 +5,54 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Home Page</div>
 
                 <div class="panel-body">
-
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
 
-                    <h1>Home Page</h1>
-                    Congratulation.
-                    You are logged in !<br><br>
-                    
-                    <a type="submit" class="btn btn-primary" href="post"> Yours Posts</a>
-    
-                    
+                        <a type="submit"  class="btn btn-primary"  href="{{ route('post.create') }}" > Create New Post</a>
 
-                    
+                        <a type="submit" style="float: right" class="btn btn-primary"  href="{{ route('post.index') }}" > Your Post</a>
+                        <br>
+                        <br>
+
+
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Created By</th>
+                                        <th width="400px">Action</th>
+                                    </tr>
+
+                                    @if (count($posts)>0)
+                                        @foreach($posts->all() as $post)
+                                <tr>
+                                    <td>{{ $post->title }}</td>
+                                    <td>{{ $post->description }}</td>
+                                    <td>{{ $post->creator->name }}</td>
+                                    @auth
+                                    <td><a class="btn btn-success" href="{{ route('post.show',$post->id) }}">Show</a>
+                                    @endauth
+                                        @if(Auth::id() == $post->user_id)
+                                     <a class="btn btn-warning" href="{{ route('post.edit',$post->id) }}">Edit</a>
+                                    @endif
+                                    </td>
+
+                                </tr>
+                                    @endforeach
+                                    @else
+                                        <h2>No Posts is Created</h2>
+                                    @endif
+
+                                </table>
+                                {{$posts->render()}}
+
+
                 </div>
             </div>
         </div>

@@ -17,6 +17,11 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('description');
+            $table->integer('user_id')->unsigned();
+
+            // 2. Create foreign key constraints
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

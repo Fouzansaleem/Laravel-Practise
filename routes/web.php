@@ -11,18 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/admin', 'AdminController@admin')
+    ->middleware('admin')
+    ->name('admin');
 
 
+//Route::get('/', 'HomeController@index');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/post','PostController');
+Route::get('/', 'HomeController@index')
+     ->name('home');
+
+Route::resource('/post', 'PostController');
 
 //Route:: resource('/post/comment/store','PostController@commentadd');
-Route::post('/comment/store', 'CommentController@store') -> name('comment.store');
+Route::post('/comment/store', 'CommentController@store')
+     ->name('comment.store');
+
+Route::any('/test', 'TestingController@test');
+
 
 

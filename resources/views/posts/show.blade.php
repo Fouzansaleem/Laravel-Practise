@@ -17,6 +17,8 @@
 
                         <b>Title:</b> {{ $post->title }}<br>
                         <b>Description:</b> {{ $post->description }}<br>
+                        <b>Created_at:</b> {{ $post->created_at }}<br>
+
 
                         <br>
                         <div class="panel-footer">
@@ -26,6 +28,7 @@
                                     <li>
                                         {{ $comment->comment}}<br>
                                         <strong> {{ $comment->user->name }} </strong>
+
                                         {{\carbon\Carbon::parse($comment->created_at)->diffForHumans() }}
                                     </li>
                                 @endforeach

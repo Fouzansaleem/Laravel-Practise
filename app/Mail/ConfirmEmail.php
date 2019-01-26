@@ -29,9 +29,7 @@ class ConfirmEmail extends Mailable {
      * @return $this
      */
     public function build() {
-
-
-        return $this->view('emails.confirmemail');
+        return $this->view('emails.confirmemail', compact($this->user));
     }
 
 

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
 
 
     use AuthenticatesUsers;
@@ -16,21 +16,25 @@ class LoginController extends Controller
      *
      * @var string
      */
-    //if user are verified then to go home
-  //  if(Auth::user()->verify =1){
-        protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
-
-  // else{ redirect('/login')->with('warning','verify your email'); }
-    //else show you are not verify your email
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
+    public function __construct() {
+        $this->middleware('guest')
+             ->except('logout');
     }
+
+    protected function authenticated(Request $request, $user) {
+        if (!$user->isVerifed()) {
+            $this->guard()
+                 ->logout();
+            return redirect('/login')->with('status', 'Check your email and verify');
+        }
+    }
+
 
 }

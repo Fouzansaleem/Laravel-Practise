@@ -7,9 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Monolog\Handler\RavenHandlerTest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable
-
-{
+class User extends Authenticatable {
     use Notifiable;
 
     /**
@@ -45,12 +43,16 @@ class User extends Authenticatable
         return $this->hasMany('App\Comment', 'user_id', 'id');
     }
 
-     const ADMIN_TYPE='admin';
-    const DEFAULT_TYPE='user';
-    public function admin(){
+    const ADMIN_TYPE = 'admin';
+    const DEFAULT_TYPE = 'user'; //TODO Constants and variable are always declared below class declaration move these
+
+    public function admin() {
         return $this->user_type === self::ADMIN_TYPE;
     }
 
+    public function isVerifed() {
+        return $this->verify == true;
+    }
 
 
 }

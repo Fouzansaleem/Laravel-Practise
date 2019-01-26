@@ -76,6 +76,8 @@ class RegisterController extends Controller
             ->send(new ConfirmEmail($user));
         return $user; //error if redirect to login
     }
+
+
     protected function registered(Request $request, $user)
     {
         $this->guard()->logout();
@@ -87,7 +89,7 @@ class RegisterController extends Controller
     {
         $user = User::where('verification_token', $verification_token)->first();
         if(!is_null($user)){
-            $user->verify = 1;
+            $user->verify = 1; //TODO Type true false instead of 1 or 0
             $user->verification_token = '';
             $user->save();
             return redirect(route('login'))->with('status','Verified'); //verified

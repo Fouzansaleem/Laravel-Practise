@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
     /*
@@ -69,9 +70,30 @@ class RegisterController extends Controller
             'user_type' => User::DEFAULT_TYPE,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'verification_token' => str_random(16),
         ]);
         Mail::to($user)
-            ->send(new ConfirmEmail());
-        return $user;
+            ->send(new ConfirmEmail($user));
+        return $user; //error if redirect to login
     }
+    protected function registered(Request $request, $user)
+    {
+        $this->guard()->logout();
+        return redirect('/login')->with('status','Check your email and verify');
+    }
+
+
+    public function verify($verification_token)
+    {
+        $user = User::where('verification_token', $verification_token)->first();
+        if(!is_null($user)){
+            $user->verify = 1;
+            $user->verification_token = '';
+            $user->save();
+            return redirect(route('login'))->with('status','Verified'); //verified
+        }else{
+            return redirect(route('login'))->with('warning','Verify your email');//error
+        }
+    }
+
 }

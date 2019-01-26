@@ -6,6 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class ConfirmEmail extends Mailable {
     use Queueable, SerializesModels;
@@ -17,8 +19,8 @@ class ConfirmEmail extends Mailable {
      */
     public $user;
 
-    public function __construct() {
-
+    public function __construct($user) {
+        $this->user = $user;
     }
 
     /**
@@ -27,7 +29,10 @@ class ConfirmEmail extends Mailable {
      * @return $this
      */
     public function build() {
+
+
         return $this->view('emails.confirmemail');
     }
+
 
 }

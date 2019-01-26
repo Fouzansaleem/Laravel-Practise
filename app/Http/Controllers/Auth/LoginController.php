@@ -7,16 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
+
 
     use AuthenticatesUsers;
 
@@ -25,8 +16,13 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //if user are verified then to go home
+  //  if(Auth::user()->verify =1){
+        protected $redirectTo = '/home';
 
+
+  // else{ redirect('/login')->with('warning','verify your email'); }
+    //else show you are not verify your email
     /**
      * Create a new controller instance.
      *
@@ -36,4 +32,5 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
 }

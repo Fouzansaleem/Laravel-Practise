@@ -5,8 +5,11 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Monolog\Handler\RavenHandlerTest;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable {
+class User extends Authenticatable
+
+{
     use Notifiable;
 
     /**
@@ -19,6 +22,8 @@ class User extends Authenticatable {
         'user_type',
         'email',
         'password',
+        'verification_token',
+        'verify',
     ];
 
     /**
@@ -45,4 +50,7 @@ class User extends Authenticatable {
     public function admin(){
         return $this->user_type === self::ADMIN_TYPE;
     }
+
+
+
 }

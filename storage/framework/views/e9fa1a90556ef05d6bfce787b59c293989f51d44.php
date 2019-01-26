@@ -4,7 +4,18 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
+                <?php if(session('status')): ?>
+                    <div class="alert alert-success">
+                        <?php echo e(session('status')); ?>
 
+                    </div>
+                <?php endif; ?>
+                <?php if(session('warning')): ?>
+                    <div class="alert alert-warning">
+                        <?php echo e(session('warning')); ?>
+
+                    </div>
+                <?php endif; ?>
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="<?php echo e(route('login')); ?>">
                         <?php echo e(csrf_field()); ?>

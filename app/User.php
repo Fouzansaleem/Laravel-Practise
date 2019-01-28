@@ -5,10 +5,10 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Monolog\Handler\RavenHandlerTest;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 
 class User extends Authenticatable {
-    use Notifiable;
+    use  Notifiable;
 
     /**
      * The attributes that are mass assignable.

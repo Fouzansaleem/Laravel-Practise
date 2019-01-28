@@ -16,10 +16,11 @@ Route::get('/admin', 'AdminController@admin')
     ->name('admin');
 
 
-//Route::view('/', 'welcome');
+
 Auth::routes();
 
-Route::get('/user/verify/{Verification_token}', 'Auth\RegisterController@verify')->name('verify');
+Route::get('/user/verify/{Verification_token}', 'Auth\RegisterController@verify')
+     ->name('verify');
 
 Route::get('/', 'HomeController@index')
      ->name('home');

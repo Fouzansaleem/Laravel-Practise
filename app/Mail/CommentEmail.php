@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
-class ConfirmEmail extends Mailable {
+class CommentEmail extends Mailable {
     use Queueable, SerializesModels;
 
     /**
@@ -17,10 +17,10 @@ class ConfirmEmail extends Mailable {
      *
      * @return void
      */
-    public $user;
+    public $comment;
 
-    public function __construct($user) {
-        $this->user = $user;
+    public function __construct($comment) {
+            $this->comment = $comment;
     }
 
     /**
@@ -29,7 +29,7 @@ class ConfirmEmail extends Mailable {
      * @return $this
      */
     public function build() {
-        return $this->view('emails.confirmemail', compact($this->user));
+        return $this->view('emails.commentemail',compact($this->comment));
     }
 
 

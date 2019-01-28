@@ -46,6 +46,24 @@
                             <li><a href="<?php echo e(route('login')); ?>">Login</a></li>
                             <li><a href="<?php echo e(route('register')); ?>">Register</a></li>
                         <?php else: ?>
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                                    Notification <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <?php $__currentLoopData = auth()->user()-> notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                    <li>
+                                        <a href="#">  <?php echo e($notification->data['comment']); ?></a>
+                                    </li>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </ul>
+                            </li>
+
+
+
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
                                     <?php echo e(Auth::user()->name); ?> <span class="caret"></span>

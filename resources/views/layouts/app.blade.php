@@ -53,12 +53,16 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    @foreach(auth()->user()-> notifications as $notification)
-
+                                    @foreach(auth()->user()-> unreadNotifications as $notification)
                                     <li>
-                                        <a href="#">  {{$notification->data['comment']}}</a>
-                                    </li>
+                                        <a style="background-color:darkgray" href="{{route('markread')}}">{{$notification->data['comment']}}</a></li>
                                     @endforeach
+                                        @foreach(auth()->user()-> readNotifications as $notification)
+
+                                            <li>
+                                                <a href="#">  {{$notification->data['comment']}}</a>
+                                            </li>
+                                        @endforeach
                                 </ul>
                             </li>
 

@@ -31,6 +31,13 @@ Route::resource('/post', 'PostController');
 Route::post('/comment/store', 'CommentController@store')
      ->name('comment.store');
 
+Route::get('markasread',function (){
+    auth()->user()->unreadNotifications->markAsRead();
+    return redirect()->back();
+})->name('markread');
+
+
+
 Route::any('/test', 'TestingController@test');
 
 

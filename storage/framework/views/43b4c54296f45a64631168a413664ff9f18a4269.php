@@ -53,12 +53,16 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <?php $__currentLoopData = auth()->user()-> notifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
+                                    <?php $__currentLoopData = auth()->user()-> unreadNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <li>
-                                        <a href="#">  <?php echo e($notification->data['comment']); ?></a>
-                                    </li>
+                                        <a style="background-color:darkgray" href="<?php echo e(route('markread')); ?>"><?php echo e($notification->data['comment']); ?></a></li>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php $__currentLoopData = auth()->user()-> readNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $notification): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                            <li>
+                                                <a href="#">  <?php echo e($notification->data['comment']); ?></a>
+                                            </li>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </ul>
                             </li>
 

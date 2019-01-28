@@ -63,7 +63,7 @@ class CommentNotify extends Notification
     public function toDatabase($notifiable){
         return[
 
-            'comment' => $this->comment->comment,
+            'comment' => 'comment added',
         ];
     }
 
